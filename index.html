@@ -2,8 +2,13 @@
 <html>
 
 <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" href="css/styles.css">
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+   <script type="application/javascript" charset="utf-8" src="js/register.js"></script>
+
   <title>Restaurant Reviews</title>
 </head>
 
@@ -15,27 +20,40 @@
   </header>
 
   <main id="maincontent">
-    <section id="map-container">
+    <section id="map-container" aria-labelledby="map-aria-desc" role="application">
       <div id="map"></div>
     </section>
+    <label id="map-aria-desc" class="map-aria-desc">Google apps Map</label>
     <section>
       <div class="filter-options">
         <h2>Filter Results</h2>
+        <div class="filter-selects">
         <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
+         <label id="neighbors-label" class="filter-label">by neighborhoods</label>
           <option value="all">All Neighborhoods</option>
         </select>
         <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
+        <label id="cuisine-label" class="filter-label">by cuisine</label>
+
           <option value="all">All Cuisines</option>
         </select>
+        </div>
       </div>
-      <ul id="restaurants-list"></ul>
+      <ul id="restaurants-list">
+                 
+      </ul>
     </section>
   </main>
 
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap"></script>
-
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZGIzMjUiLCJhIjoiY2ppbHlvY2llMjJicjNwbWN0d3FpemdpYiJ9.lp4Gb3dkr33IIEHk1RYijw';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v10'
+});
+</script>
 
   <footer id="footer">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
